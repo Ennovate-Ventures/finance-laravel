@@ -31,6 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('income')->group(function () {
         Route::get('/', [IncomeController::class, 'index']);
         Route::get('sum', [IncomeController::class, 'getGeneralIncomeSum']);
+        Route::get("projectsum/today/{id}",[IncomeController::class, 'getIncomeSumToday']);
         Route::get("projectsum/{id}", [IncomeController::class, 'getProjectIncomeSum']);
         Route::post("store", [IncomeController::class, 'store']);
     });
@@ -39,6 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('expenditure')->group(function () {
         Route::get('/', [ExpenditureController::class, 'index']);
         Route::get('sum', [ExpenditureController::class, 'getGeneralExpenditureSum']);
+        Route::get("projectsum/today/{id}",[ExpenditureController::class, 'getExpenditureSumToday']);
         Route::get("projectsum/{id}", [ExpenditureController::class, 'getProjectExpenditureSum']);
         Route::post("store", [ExpenditureController::class, 'store']);
     });

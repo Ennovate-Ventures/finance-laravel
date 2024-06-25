@@ -45,7 +45,8 @@ class AuthController extends Controller
 
             return \response()->json([
                 'token' => $user->createToken(time())->plainTextToken,
-                'user' => $user
+                'user' => $user,
+                'project_id' => 1
             ], 200);
         }
 
