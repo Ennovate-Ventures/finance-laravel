@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Expenditure;
+use Illuminate\Http\Request;
+
+class ExpenditureController extends Controller
+{
+    public function index(){
+        $expenditures = Expenditure::with('project')->get();
+
+        return response()->json($expenditures);
+    }
+
+    public function getGeneralExpenditureSum(){
+        $expenditureSum = Expenditure::sum("amount");
+        return response()->json($expenditureSum, 200);
+    }
+
+    public function getProjectExpenditureSum($id){
+        $totalAmount = Expenditure::where("project_id", $id)->sum("amount");
+        return response()->json($totalAmount, 200);
+    }
+
+    public function store(Request $request){
+        Expenditure::create([
+            'title' => $request->title, 
+            'amount' => $request->amount, 
+            'project_id' => $request->project_id
+        ]);
+        
+        return response()->json('Expenditure record created', 201);
+    }
+}
