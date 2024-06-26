@@ -21,7 +21,10 @@ class IncomeController extends Controller
 
     public function getIncomeSumToday($id){
         $totalAmount = Income::where("project_id", $id)->whereDate('created_at', Carbon::today())->sum("amount");
-        return response()->json($totalAmount, 200);
+        return response()->json([
+            'amount' => $totalAmount,
+            'message' => 'success'
+        ], 200);
     }
 
     public function getProjectIncomeSum($id){

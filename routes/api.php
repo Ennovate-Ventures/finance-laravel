@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('dashboard')->group(function() {
         Route::get('/',[DashboardController::class, 'index']);
         Route::get('/project/{id}',[DashboardController::class,'project']);
+        Route::get('/mobile/project/{id}',[DashboardController::class, 'mobileDashboardToday']);
     });
 
     Route::prefix('projects')->group(function () {
