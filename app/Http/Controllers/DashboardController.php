@@ -6,7 +6,6 @@ use App\Models\Expenditure;
 use App\Models\Income;
 use App\Models\Project;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
