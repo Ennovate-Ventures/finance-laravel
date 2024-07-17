@@ -36,7 +36,8 @@ class IncomeController extends Controller
         Income::create([
             'title' => $request->title, 
             'amount' => $request->amount, 
-            'project_id' => $request->project_id
+            'project_id' => $request->project_id,
+            'count' => $request->count
         ]);
         
         return response()->json('Income record created', 201);

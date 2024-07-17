@@ -10,6 +10,6 @@ class Income extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'amount', 'project_id'
+        'title', 'amount', 'project_id', "count"
     ];
 }

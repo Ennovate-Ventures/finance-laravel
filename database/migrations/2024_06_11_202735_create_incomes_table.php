@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string("title");
             $table->float('amount', precision: 53);
+            $table->integer("count");
             $table->foreignIdFor(Project::class);
             $table->timestamps();
         });

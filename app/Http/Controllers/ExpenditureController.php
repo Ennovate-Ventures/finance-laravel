@@ -36,7 +36,8 @@ class ExpenditureController extends Controller
         Expenditure::create([
             'title' => $request->title, 
             'amount' => $request->amount, 
-            'project_id' => $request->project_id
+            'project_id' => $request->project_id,
+            'count' => $request->count
         ]);
         
         return response()->json('Expenditure record created', 201);
