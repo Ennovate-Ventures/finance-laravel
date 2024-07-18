@@ -19,5 +19,11 @@ class AuthSeeder extends Seeder
             "email" => "kevin@ennovateventures.co",
             "password" => Hash::make("Test1234!")
            ]);
+
+           User::create([
+            "name" => "Devotha",
+            "email" => "devotha@ennovateventures.co",
+            "password" => Hash::make("Test1234!")
+           ]);
     }
 }
