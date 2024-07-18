@@ -12,4 +12,8 @@ class Income extends Model
     protected $fillable = [
         'title', 'amount', 'project_id', "count"
     ];
+
+    public function project(){
+        return $this->belongsTo(Project::class);
+    }
 }

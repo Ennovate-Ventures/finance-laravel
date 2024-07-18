@@ -15,12 +15,18 @@ class ExpenditureController extends Controller
     }
 
     public function getGeneralExpenditureSum(){
-        $expenditureSum = Expenditure::sum("amount");
+        $expenditureSum = Expenditure::get()
+        ->sum(function ($income) {
+            return $income->amount * $income->count;
+        });
         return response()->json($expenditureSum, 200);
     }
 
     public function getExpenditureSumToday($id){
-        $totalAmount = Expenditure::where("project_id", $id)->whereDate('created_at', Carbon::today())->sum("amount");
+        $totalAmount = Expenditure::where("project_id", $id)->whereDate('created_at', Carbon::today())->get()
+        ->sum(function ($income) {
+            return $income->amount * $income->count;
+        });
         return response()->json([
             'amount' => $totalAmount,
             'message' => 'success'
@@ -28,7 +34,10 @@ class ExpenditureController extends Controller
     }
 
     public function getProjectExpenditureSum($id){
-        $totalAmount = Expenditure::where("project_id", $id)->sum("amount");
+        $totalAmount = Expenditure::where("project_id", $id)->get()
+        ->sum(function ($income) {
+            return $income->amount * $income->count;
+        });
         return response()->json($totalAmount, 200);
     }
 

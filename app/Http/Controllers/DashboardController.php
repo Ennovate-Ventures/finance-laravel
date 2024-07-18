@@ -23,8 +23,14 @@ class DashboardController extends Controller
     }
 
     public function project($id){
-        $expenditureSum = Expenditure::where('project_id', $id)->sum("amount");
-        $incomeSum = Income::where('project_id', $id)->sum("amount");
+        $expenditureSum = Expenditure::where('project_id', $id)->get()
+        ->sum(function ($income) {
+            return $income->amount * $income->count;
+        });
+        $incomeSum = Income::where('project_id', $id)->get()
+        ->sum(function ($income) {
+            return $income->amount * $income->count;
+        });
 
         return response()->json([
             'projects' => 1,

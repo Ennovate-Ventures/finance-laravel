@@ -9,18 +9,23 @@ use Illuminate\Http\Request;
 class IncomeController extends Controller
 {
     public function index(){
-        $incomes = Income::get();
+        $incomes = Income::with('project')->get();
 
         return response()->json($incomes);
     }
 
     public function getGeneralIncomeSum(){
-        $incomeSum = Income::sum("amount");
+        $incomeSum = Income::get()->sum(function ($income) {
+            return $income->amount * $income->count;
+        });
         return response()->json($incomeSum, 200);
     }
 
     public function getIncomeSumToday($id){
-        $totalAmount = Income::where("project_id", $id)->whereDate('created_at', Carbon::today())->sum("amount");
+        $totalAmount = Income::where("project_id", $id)->get()
+        ->sum(function ($income) {
+            return $income->amount * $income->count;
+        });
         return response()->json([
             'amount' => $totalAmount,
             'message' => 'success'
